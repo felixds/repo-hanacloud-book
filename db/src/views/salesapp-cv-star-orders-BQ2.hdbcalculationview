@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="salesapp.views::salesapp-cv-star-orders-BQ2" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="OrdersByEmployee"/>
+<localVariables>
+  <variable id="salesapp-ip-firstname" parameter="true">
+    <descriptions defaultDescription="Firstname"/>
+    <variableProperties datatype="NVARCHAR" length="25" scale="NaN" mandatory="true">
+      <valueDomain type="AttributeValue">
+        <externalLikeStructureName>salesapp.tables::EMPLOYEES</externalLikeStructureName>
+        <externalLikeElementName>EMPFIRSTNAME</externalLikeElementName>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" forStarJoin="true">
+    <targetVariable name="salesapp-ip-firstname" resourceUri="salesapp.views::salesapp-cv-dim-employees-BQ2"/>
+    <localVariable>salesapp-ip-firstname</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="salesapp.tables::ORDERS">
+    <resourceUri>salesapp.tables::ORDERS</resourceUri>
+  </DataSource>
+  <DataSource id="salesapp.tables::ORDERDETAILS">
+    <resourceUri>salesapp.tables::ORDERDETAILS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ORDERNUMBER" aggregationType="sum"/>
+      <viewAttribute id="ORDERDATE"/>
+      <viewAttribute id="CUSTOMERID" aggregationType="sum"/>
+      <viewAttribute id="SHIPDATE"/>
+      <viewAttribute id="EMPLOYEEID" aggregationType="sum"/>
+      <viewAttribute id="ORDERTOTAL" aggregationType="sum"/>
+      <viewAttribute id="PRODUCTNUMBER" aggregationType="sum"/>
+      <viewAttribute id="QUOTEDPRICE" aggregationType="sum"/>
+      <viewAttribute id="QUANTITYORDERED" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="salesapp-cv-star-orders-cc-totalcost" datatype="DECIMAL" length="15" scale="2" expressionLanguage="SQL">
+        <formula>&quot;QUOTEDPRICE&quot;*&quot;QUANTITYORDERED&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="salesapp.tables::ORDERS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORDERNUMBER" source="ORDERNUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORDERDATE" source="ORDERDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMERID" source="CUSTOMERID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SHIPDATE" source="SHIPDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="EMPLOYEEID" source="EMPLOYEEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORDERTOTAL" source="ORDERTOTAL"/>
+    </input>
+    <input node="salesapp.tables::ORDERDETAILS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTNUMBER" source="PRODUCTNUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUOTEDPRICE" source="QUOTEDPRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITYORDERED" source="QUANTITYORDERED"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ORDERNUMBER" source="ORDERNUMBER"/>
+    </input>
+    <joinAttribute name="ORDERNUMBER"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="ORDERDATE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ORDERDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="ORDERDATE"/>
+    </attribute>
+    <attribute id="SHIPDATE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SHIPDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="SHIPDATE"/>
+    </attribute>
+  
+    <attribute id="CUSTOMERID$local">
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOMERID"/>
+    </attribute>
+    <attribute id="EMPLOYEEID$local">
+      <keyMapping columnObjectName="Join_1" columnName="EMPLOYEEID"/>
+    </attribute>
+    <attribute id="PRODUCTNUMBER$local">
+      <keyMapping columnObjectName="Join_1" columnName="PRODUCTNUMBER"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ORDERNUMBER" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ORDERNUMBER"/>
+      <measureMapping columnObjectName="Join_1" columnName="ORDERNUMBER"/>
+    </measure>
+    <measure id="ORDERTOTAL" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ORDERTOTAL"/>
+      <measureMapping columnObjectName="Join_1" columnName="ORDERTOTAL"/>
+    </measure>
+    <measure id="QUOTEDPRICE" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="QUOTEDPRICE"/>
+      <measureMapping columnObjectName="Join_1" columnName="QUOTEDPRICE"/>
+    </measure>
+    <measure id="QUANTITYORDERED" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="QUANTITYORDERED"/>
+      <measureMapping columnObjectName="Join_1" columnName="QUANTITYORDERED"/>
+    </measure>
+    <measure id="salesapp-cv-star-orders-cc-totalcost" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="salesapp-cv-star-orders-cc-totalcost"/>
+      <measureMapping columnObjectName="Join_1" columnName="salesapp-cv-star-orders-cc-totalcost"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="salesapp.views::salesapp-cv-dim-customers-BQ1">
+      <attributes>
+        <attributeRef>CUSTOMERID$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>CustomerID</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="referential" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+    <logicalJoin associatedObjectUri="salesapp.views::salesapp-cv-dim-employees-BQ2">
+      <attributes>
+        <attributeRef>EMPLOYEEID$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>EmployeeID</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="referential" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+    <logicalJoin associatedObjectUri="salesapp.views::salesapp-cv-dim-products-vendors-BQ2">
+      <attributes>
+        <attributeRef>PRODUCTNUMBER$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>ProductNumber</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="referential" referentialDirection="right" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="216"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="salesapp.tables::ORDERS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="212"/>
+    </shape>
+    <shape modelObjectName="salesapp.tables::ORDERDETAILS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="255"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="276" y="90"/>
+      <rectangleSize width="260.8291015625"/>
+    </shape>
+    <shape modelObjectName="salesapp.views::salesapp-cv-dim-customers-BQ1" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="-129" y="88"/>
+      <rectangleSize width="346.7734375"/>
+    </shape>
+    <shape modelObjectName="salesapp.views::salesapp-cv-dim-employees-BQ2" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="-129" y="370"/>
+      <rectangleSize width="348.115234375"/>
+    </shape>
+    <shape modelObjectName="salesapp.views::salesapp-cv-dim-products-vendors-BQ2" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="671" y="30"/>
+      <rectangleSize width="388.09375"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

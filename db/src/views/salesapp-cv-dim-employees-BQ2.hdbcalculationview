@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="salesapp.views::salesapp-cv-dim-employees-BQ2" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="Employees"/>
+<localVariables>
+  <variable id="salesapp-ip-firstname" parameter="true">
+    <descriptions defaultDescription=" Firstname"/>
+    <variableProperties datatype="NVARCHAR" length="25" scale="NaN" mandatory="true">
+      <valueDomain type="AttributeValue">
+        <externalLikeStructureName>salesapp.tables::EMPLOYEES</externalLikeStructureName>
+        <externalLikeElementName>EMPFIRSTNAME</externalLikeElementName>
+      </valueDomain>
+      <selection multiLine="false" type="SingleValue"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:VariableMapping" dataSource="salesapp.functions::salesapp-ft-dim-employees-BQ2">
+    <targetVariable name="IP_EMPFIRSTNAME" resourceUri="salesapp.functions::salesapp-ft-dim-employees-BQ2"/>
+    <localVariable>salesapp-ip-firstname</localVariable>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="salesapp.functions::salesapp-ft-dim-employees-BQ2" type="TABLE_FUNCTION">
+    <resourceUri>salesapp.functions::salesapp-ft-dim-employees-BQ2</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+
+<logicalModel id="salesapp.functions::salesapp-ft-dim-employees-BQ2">
+  <attributes>
+    <attribute id="EmployeeID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EmployeeID"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPLOYEEID"/>
+    </attribute>
+    <attribute id="EmpFirstName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FirstName"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPFIRSTNAME"/>
+    </attribute>
+    <attribute id="EmpLastName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LastName"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPLASTNAME"/>
+    </attribute>
+    <attribute id="EmpState" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EmpState"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPSTATE"/>
+    </attribute>
+    <attribute id="EmpCity" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="City"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPCITY"/>
+    </attribute>
+    <attribute id="EmpStreetAddress" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="StreetAddress"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPSTREETADDRESS"/>
+    </attribute>
+    <attribute id="EmpPhoneNumber" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PhoneNumber"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPPHONENUMBER"/>
+    </attribute>
+    <attribute id="EmpAreaCode" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="AreaCode"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPAREACODE"/>
+    </attribute>
+    <attribute id="EmpZipCode" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZipCode"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-employees-BQ2" columnName="EMPZIPCODE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>

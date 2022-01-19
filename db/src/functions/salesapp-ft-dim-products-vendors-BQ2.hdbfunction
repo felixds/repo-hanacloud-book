@@ -1,0 +1,96 @@
+FUNCTION "salesapp.functions::salesapp-ft-dim-products-vendors-BQ2"( )
+
+RETURNS TABLE ( productnumber INTEGER,
+		            categoryid INTEGER,
+                    categorydescription NVARCHAR(75),
+                    productname NVARCHAR(50),
+                    productdescription NVARCHAR(100),
+                    retailprice DECIMAL(15,2),
+                    quantityonhand SMALLINT,
+                    vendorid INTEGER, 
+    				vendname NVARCHAR(25),
+	    			vendstreetaddress NVARCHAR(50),
+		    		vendcity NVARCHAR(30),
+					vendstate NVARCHAR(2),
+					vendzipcode NVARCHAR(10),
+					vendphonenumber NVARCHAR(15),
+					vendfaxnumber NVARCHAR(15),
+					vendwebpage NVARCHAR(200),
+					vendemailaddress NVARCHAR(50),
+					wholesaleprice DECIMAL(15,2),
+                    daystodeliver SMALLINT
+)
+                    
+LANGUAGE SQLSCRIPT
+SQL SECURITY INVOKER 
+AS
+BEGIN
+-- projection for CATEGORIES table
+lt_categories = SELECT	categoryid, 
+						categorydescription 
+				FROM "salesapp.tables::CATEGORIES";
+				
+-- projection for VENDORS table
+lt_vendors =	SELECT	vendorid, 
+					vendname,
+					vendstreetaddress,
+					vendcity,
+					vendstate,
+					vendzipcode,
+					vendphonenumber,
+					vendfaxnumber,
+					vendwebpage,
+					vendemailaddress
+				FROM "salesapp.tables::VENDORS";
+
+-- Join between PRODUCTS and CATEGORIES
+lt_products_join_categories = SELECT	products.productnumber,
+		                            	products.categoryid,
+		                            	categories.categorydescription,
+		                            	products.productname,
+		                            	products.productdescription,
+		                            	products.retailprice,
+		                            	products.quantityonhand
+                        		FROM  "salesapp.tables::PRODUCTS" AS products
+                        			LEFT OUTER JOIN :lt_categories AS categories
+                        			ON categories.categoryid = products.categoryid
+                        		ORDER BY products.productnumber;
+                         
+
+-- Join between PRODUCT VENDORS and VENDORS
+lt_products_vendors_join_vendors =	SELECT	productvendors.productnumber,
+	                            			vendors.*,
+	                            			productvendors.wholesaleprice,
+	                            			productvendors.daystodeliver
+                        			FROM  "salesapp.tables::PRODUCTVENDORS" AS productvendors
+                        				LEFT OUTER JOIN :lt_vendors AS vendors
+                        				ON vendors.vendorid = productvendors.vendorid
+                        			ORDER BY productvendors.productnumber;
+
+-- Final JOIN
+lt_products_vendors =	SELECT	productcategories.productnumber,
+		                        productcategories.categoryid,
+		                        productcategories.categorydescription,
+		                        productcategories.productname,
+		                        productcategories.productdescription,
+		                        productcategories.retailprice,
+		                        productcategories.quantityonhand,
+		                        productvendorsvendors.vendorid, 
+								productvendorsvendors.vendname,
+								productvendorsvendors.vendstreetaddress,
+								productvendorsvendors.vendcity,
+								productvendorsvendors.vendstate,
+								productvendorsvendors.vendzipcode,
+								productvendorsvendors.vendphonenumber,
+								productvendorsvendors.vendfaxnumber,
+								productvendorsvendors.vendwebpage,
+								productvendorsvendors.vendemailaddress,
+								productvendorsvendors.wholesaleprice,
+				                productvendorsvendors.daystodeliver
+                        FROM :lt_products_join_categories AS productcategories
+                        	LEFT OUTER JOIN :lt_products_vendors_join_vendors AS productvendorsvendors
+                        	ON productvendorsvendors.productnumber = productcategories.productnumber
+                        ORDER BY productcategories.productnumber;
+
+RETURN SELECT * FROM :lt_products_vendors;
+END;

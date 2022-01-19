@@ -1,0 +1,22 @@
+FUNCTION "salesapp.functions::salesapp-ft-dim-employees-BQ2"( ip_empfirstname NVARCHAR(25) )
+RETURNS TABLE ( employeeid INTEGER,
+                empfirstname  NVARCHAR(25),
+                emplastname NVARCHAR(25),
+                empstreetaddress NVARCHAR(25),
+                empcity NVARCHAR(25),
+                empstate NVARCHAR(25),
+                empzipcode NVARCHAR(25),
+                empareacode SMALLINT,
+                empphonenumber NVARCHAR(8)          
+)
+
+LANGUAGE SQLSCRIPT
+SQL SECURITY INVOKER 
+
+AS
+BEGIN
+
+    lt_employees = SELECT * FROM "salesapp.tables::EMPLOYEES";
+    RETURN SELECT * FROM :lt_employees WHERE empfirstname = :ip_empfirstname;
+    
+END;

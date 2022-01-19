@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="salesapp.views::salesapp-cv-dim-customers-BQ1" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="Customers"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="salesapp.tables::CUSTOMERS">
+    <resourceUri>salesapp.tables::CUSTOMERS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+
+<logicalModel id="salesapp.tables::CUSTOMERS">
+  <attributes>
+    <attribute id="CustomerID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CustomerID"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTOMERID"/>
+    </attribute>
+    <attribute id="CustFirstName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FirstName"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTFIRSTNAME"/>
+    </attribute>
+    <attribute id="CustLastName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LastName"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTLASTNAME"/>
+    </attribute>
+    <attribute id="CustStreet" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Street"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTSTREETADDRESS"/>
+    </attribute>
+    <attribute id="CustCity" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="City"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTCITY"/>
+    </attribute>
+    <attribute id="CustState" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="State"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTSTATE"/>
+    </attribute>
+    <attribute id="CustZipCode" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZipCode"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTZIPCODE"/>
+    </attribute>
+    <attribute id="CustAreaCode" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="AreaCode"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTAREACODE"/>
+    </attribute>
+    <attribute id="PhoneNumber" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PhoneNumber"/>
+      <keyMapping columnObjectName="CUSTOMERS" columnName="CUSTPHONENUMBER"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="salesapp.views::salesapp-cv-dim-products-BQ1" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="Products"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="salesapp.tables::PRODUCTS">
+    <resourceUri>salesapp.tables::PRODUCTS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+
+<logicalModel id="salesapp.tables::PRODUCTS">
+  <attributes>
+    <attribute id="ProductID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ProductID"/>
+      <keyMapping columnObjectName="PRODUCTS" columnName="PRODUCTNUMBER"/>
+    </attribute>
+    <attribute id="ProductName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ProductName"/>
+      <keyMapping columnObjectName="PRODUCTS" columnName="PRODUCTNAME"/>
+    </attribute>
+    <attribute id="Description" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Description"/>
+      <keyMapping columnObjectName="PRODUCTS" columnName="PRODUCTDESCRIPTION"/>
+    </attribute>
+    <attribute id="RetailPrice" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RetailPrice"/>
+      <keyMapping columnObjectName="PRODUCTS" columnName="RETAILPRICE"/>
+    </attribute>
+    <attribute id="QuantityOnHand" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QuantityOnHand"/>
+      <keyMapping columnObjectName="PRODUCTS" columnName="QUANTITYONHAND"/>
+    </attribute>
+    <attribute id="CategoryID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CategoryID"/>
+      <keyMapping columnObjectName="PRODUCTS" columnName="CATEGORYID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>

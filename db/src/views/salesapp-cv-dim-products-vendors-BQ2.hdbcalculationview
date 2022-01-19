@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="salesapp.views::salesapp-cv-dim-products-vendors-BQ2" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="Products vendors"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="salesapp.functions::salesapp-ft-dim-products-vendors-BQ2" type="TABLE_FUNCTION">
+    <resourceUri>salesapp.functions::salesapp-ft-dim-products-vendors-BQ2</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+
+<logicalModel id="salesapp.functions::salesapp-ft-dim-products-vendors-BQ2">
+  <attributes>
+    <attribute id="ProductNumber" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ProductNumber"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="PRODUCTNUMBER"/>
+    </attribute>
+    <attribute id="ProductDescription" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ProductDescription"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="PRODUCTDESCRIPTION"/>
+    </attribute>
+    <attribute id="ProductName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ProductName"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="PRODUCTNAME"/>
+    </attribute>
+    <attribute id="CategoryID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CategoryID"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="CATEGORYID"/>
+    </attribute>
+    <attribute id="CategoryDescription" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CategoryDescription"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="CATEGORYDESCRIPTION"/>
+    </attribute>
+    <attribute id="Vendor" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Vendor"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDORID"/>
+    </attribute>
+    <attribute id="VendorName" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VendorName"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDNAME"/>
+    </attribute>
+    <attribute id="VendState" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="State"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDSTATE"/>
+    </attribute>
+    <attribute id="VendCity" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="City"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDCITY"/>
+    </attribute>
+    <attribute id="VendZipCode" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZipCode"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDZIPCODE"/>
+    </attribute>
+    <attribute id="VendStreetAddress" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="StreetAddress"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDSTREETADDRESS"/>
+    </attribute>
+    <attribute id="VendPhoneNumber" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PhoneNumber"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDPHONENUMBER"/>
+    </attribute>
+    <attribute id="VendFaxNumber" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FaxNumber"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDFAXNUMBER"/>
+    </attribute>
+    <attribute id="VendWebPage" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WebPage"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDWEBPAGE"/>
+    </attribute>
+    <attribute id="VendEmailAddress" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EmailAddress"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="VENDEMAILADDRESS"/>
+    </attribute>
+    <attribute id="RetailPrice" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RetailPrice"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="RETAILPRICE"/>
+    </attribute>
+    <attribute id="DaysToDeliver" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DaysToDeliver"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="DAYSTODELIVER"/>
+    </attribute>
+    <attribute id="SalesPrice" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SalesPrice"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="WHOLESALEPRICE"/>
+    </attribute>
+    <attribute id="QuantityOnHand" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QuantityOnHand"/>
+      <keyMapping columnObjectName="salesapp-ft-dim-products-vendors-BQ2" columnName="QUANTITYONHAND"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>
